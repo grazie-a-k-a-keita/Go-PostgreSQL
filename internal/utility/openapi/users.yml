@@ -1,0 +1,135 @@
+openapi: '3.0.2'
+
+info:
+  title: Users API
+  description: CRUD operations for user management
+  version: 1.0.0
+servers:
+  - url: https://localhost:8080
+
+paths:
+  /users:
+    get:
+      summary: ユーザーデータを全て取得する
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: InternalServerError
+    post:
+      summary: ユーザーを一件登録する
+      requestBody:
+        description: User data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                last_name:
+                  type: string
+                first_name:
+                  type: string
+                birth_date:
+                  type: string
+                  format: date
+                gender:
+                  type: string
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: BadRequest
+        '500':
+          description: InternalServerError
+
+  /users/{id}:
+    get:
+      summary: idと一致するユーザーを一件取得する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: NotFound
+        '500':
+          description: InternalServerError
+    put:
+      summary: idと一致するユーザーを一件更新する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User ID
+          schema:
+            type: string
+      requestBody:
+        description: User data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                last_name:
+                  type: string
+                first_name:
+                  type: string
+                birth_date:
+                  type: string
+                  format: date
+                gender:
+                  type: string
+      responses:
+        '200':
+          description: User updated successfully
+        '400':
+          description: BadRequest
+        '404':
+          description: NotFound
+        '500':
+          description: InternalServerError
+    delete:
+      summary: idと一致するユーザーを一件削除する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User ID
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted successfully
+        '400':
+          description: BadRequest
+        '404':
+          description: NotFound
+        '500':
+          description: InternalServerError
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birth_date:
+          type: string
+          format: date
+        gender:
+          type: string
+        created_at:
+          type: string
+          format: date-time
