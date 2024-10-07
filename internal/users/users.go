@@ -18,13 +18,12 @@ type User struct {
 	CreatedAt time.Time `db:"created_at"`
 }
 
-func HandleUsers(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func HandleUsers(w http.ResponseWriter, r *http.Request, db *sql.DB, id string) {
 
 	// HTTPメソッドで処理を振り分ける
 	switch r.Method {
 	case http.MethodGet:
 		// GETリクエストの処理
-		id := r.URL.Query().Get("id") // URLからidを取得
 		var users []User
 		var queryRows *sql.Rows
 
@@ -100,12 +99,6 @@ func HandleUsers(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	case http.MethodPut:
 		// PUTリクエストの処理
-		id := r.URL.Query().Get("id") // URLからidを取得
-		if id == "" {
-			http.Error(w, "Bad Request: Missing ID", http.StatusBadRequest)
-			return
-		}
-
 		var user User
 
 		decoder := json.NewDecoder(r.Body)
@@ -142,11 +135,6 @@ func HandleUsers(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	case http.MethodDelete:
 		// DELETEリクエストの処理
-		id := r.URL.Query().Get("id") // URLからidを取得
-		if id == "" {
-			http.Error(w, "Bad Request: Missing ID", http.StatusBadRequest)
-			return
-		}
 
 		// IDが存在するか確認
 		var existingID string

@@ -1,18 +1,15 @@
-## Go-PostgreSQL
+## Go PostgreSQL
 
 RestAPI のデモ
 
-### 1. テーブルの作成
+### 1. テーブルのアクセス
 
-`./internal/utility/sql/create_tables.sql` にあるファイルを DB に実行
-
-```
-# DB接続情報
-POSTGRES_USER: postgres
-POSTGRES_PASSWORD: postgres
-POSTGRES_DB: postgres
-POSTGRES_HOSTNAME: localhost
-```
+| 項目              | 値        |
+| ----------------- | --------- |
+| POSTGRES_USER     | postgres  |
+| POSTGRES_PASSWORD | postgres  |
+| POSTGRES_DB       | postgres  |
+| POSTGRES_HOSTNAME | localhost |
 
 ### 2. サーバー起動
 
@@ -81,3 +78,8 @@ go run cmd/main.go
 | 415 Unsupported MediaTYpe | リクエストの Content-Type ヘッダがサーバで受け入れられない         | サーバ側で Body を解釈できない                             |
 | 409 Conflict              | リソースの現状の状態の矛盾している                                 | 更新順序の前後等                                           |
 | 500 Internal Server Error | サーバ内でエラーが発生した                                         | 上記以外のサーバエラー                                     |
+
+
+### 4. その他
+
+デバッグ方法：`main.go` を開いた状態で `F5` 押下

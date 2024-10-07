@@ -5,7 +5,7 @@ info:
   description: CRUD operations for user management
   version: 1.0.0
 servers:
-  - url: https://localhost:8080
+  - url: http://localhost:8080
 
 paths:
   /users:
@@ -26,15 +26,18 @@ paths:
             schema:
               type: object
               properties:
-                last_name:
+                lastName:
                   type: string
-                first_name:
+                  example: "Yamada"
+                firstName:
                   type: string
-                birth_date:
+                  example: "Taro"
+                birthDate:
                   type: string
                   format: date
                 gender:
                   type: string
+                  example: "male"
       responses:
         '201':
           description: User created successfully
@@ -77,15 +80,18 @@ paths:
             schema:
               type: object
               properties:
-                last_name:
+                lastNdame:
                   type: string
-                first_name:
+                  example: "Yamada"
+                firstName:
                   type: string
-                birth_date:
+                  example: "Taro"
+                birthDate:
                   type: string
                   format: date
                 gender:
                   type: string
+                  example: "male"
       responses:
         '200':
           description: User updated successfully
